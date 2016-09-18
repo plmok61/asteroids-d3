@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  font-family: helvetica;
+  position: relative;
+  background-image: url("hubble.jpg");
+  background: cover;
+}
+iframe {
+  position: absolute;
+  z-index: 1;
+}
+.mouse {
+  position: absolute;
+  background-color: orange;
+}
+.astroid {
+  background-image: url('asteroid.png');
+  background-size: 100% 100%;
+  position: absolute;
+}
+.vis {
+  background-color: black;
+}
+.scoreboard {
+  width: 250px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
+  border-radius: 3px;
+}
+.scoreboard div {
+  line-height: 33px;
+  font-size: 25px;
+  float: right;
+}
+.gameboard {
+  border: 3px solid red;
+}
