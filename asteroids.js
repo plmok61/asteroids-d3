@@ -5,7 +5,7 @@ var canvasHeight = 700;
 
 var highScore = 0;
 var score = 0;
-var collisionCount = 0;
+var collisionCount = 100;
 
 var dragging = false;
 
@@ -67,7 +67,7 @@ var player = canvas.append('rect')
   .attr('class', 'player')
   .call(drag);
 
-var astroids = canvas.selectAll('circle');
+var asteroids = canvas.selectAll('circle');
 var spaceShip = canvas.select('.player');
 
 var isAlreadyTouching = false;
@@ -76,7 +76,7 @@ function trackMove() {
   var playerX = spaceShip.node().x.animVal.value + 20;
   var playerY = spaceShip.node().y.animVal.value + 20;
 
-  astroids.each(function() {
+  asteroids.each(function() {
   var circle = d3.select(this);
     var circleX = circle[0][0].cx.animVal.value;
     var circleY = circle[0][0].cy.animVal.value;
@@ -86,8 +86,8 @@ function trackMove() {
         Math.abs(playerY - circleY) < 40 ) {
       isAlreadyTouching = true;
     console.log(isAlreadyTouching)
-      collisionCount++
-      d3.select('div.collisions').text("Collisions: " + collisionCount);
+      collisionCount--
+      d3.select('div.collisions span').text(collisionCount);
     }
     if (Math.abs(playerX - circleX) > 40 &&
         Math.abs(playerY - circleY) > 40) {
@@ -95,13 +95,13 @@ function trackMove() {
     console.log(isAlreadyTouching)
     }
 
-    if (collisionCount >= 20) {
+    if (collisionCount <= 0) {
       if (score > highScore) {
         highScore = score;
         d3.select('div.highscore span').text(highScore)
       }
       score = 0;
-      collisionCount = 0;
+      collisionCount = 100;
     }
 
   })
@@ -113,6 +113,8 @@ var timer = setInterval(function() {
   d3.select('div.current span').text(score)
 },100)
 
+d3.select('body')
+  .on('keydown')
 
 trackMove();
 
